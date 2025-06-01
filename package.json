@@ -1,0 +1,25 @@
+{
+  "name": "library-api",
+  "version": "1.0.0",
+  "description": "A simple Express + SQLite3 API for library locations and hours",
+  "main": "library-api.js",
+  "scripts": {
+    "start": "node library-api.js",
+    "dev": "nodemon library-api.js"
+  },
+  "keywords": [
+    "express",
+    "sqlite3",
+    "library",
+    "api"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "sqlite3": "^5.1.6"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  }
+}
