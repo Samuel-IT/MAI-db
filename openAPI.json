@@ -1,0 +1,132 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Library API",
+    "version": "1.0.0",
+    "description": "API for accessing library locations and opening hours"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000",
+      "description": "Local server"
+    }
+  ],
+  "paths": {
+    "/libraries": {
+      "get": {
+        "summary": "Get all libraries",
+        "responses": {
+          "200": {
+            "description": "A list of libraries",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Library"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/libraries/{id}": {
+      "get": {
+        "summary": "Get a specific library and its opening hours",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "The ID of the library",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Library details and opening hours",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "$ref": "#/components/schemas/LibraryDetails"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Library not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Library": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "library_national"
+          },
+          "name": {
+            "type": "string",
+            "example": "National Library"
+          },
+          "location": {
+            "type": "string",
+            "example": "100 Victoria Street, Singapore 188064"
+          }
+        }
+      },
+      "LibraryDetails": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "location": {
+            "type": "string"
+          },
+          "hours": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LibraryHour"
+            }
+          }
+        }
+      },
+      "LibraryHour": {
+        "type": "object",
+        "properties": {
+          "day_of_week": {
+            "type": "string",
+            "example": "Monday"
+          },
+          "hours": {
+            "type": "string",
+            "example": "Closed"
+          }
+        }
+      }
+    }
+  }
+}
